@@ -8,6 +8,11 @@ int IOCContainer::s_nextTypeId = 115094801;
 
 int main(int argc, char *argv[])
 {
+    /*Работа с IOC-контейнером:
+    1. Создать объект IProcessor (используя актуальную реализацию);
+    2. Создать объект компьютера;
+    3. Внедрить объект IProcessor в компьютер;
+    4. Настроить компьютер. */
     IOCContainer injector;                                                           //  Инициализация IOC-контейнера
 
 
