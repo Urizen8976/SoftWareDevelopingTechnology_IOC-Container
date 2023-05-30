@@ -5,38 +5,37 @@
 #include <iostream>
 
 
-enum ProcessorType  //enumeration for type of processor (84 and 64 for correct output couse its enum)
-{ x86 = 86,
-  x64 = 64
-};
+enum ProcessorType                          //  Определение двух типов процессоров в перечислении
+{  x86 = 86, x64 = 64  };
 
 
-//abstract class of Processor
-class IProcessor
+class IProcessor                            //  Создание абстрактного класса для процессора
 {
 protected:
-    std::string Version;
-    ProcessorType Type;
-    double Speed;
+    std::string m_version;                  //  Объявление 3-ёх нужных член-данных
+    ProcessorType m_type;
+    double m_speed;
 
 public:
-    IProcessor(){}// default constructor
-
-    //Setter
-    void SetProcessor(std::string version, ProcessorType type, double speed)
-    {
-        Version = version;
-        Type = type;
-        Speed = speed;
+    IProcessor() {}                         //  Конструктор по умолчанию
+    void SetProcessorInfo(std::string version, ProcessorType type, double speed)
+    {                                       //  Сеттер
+        m_version = version;
+        m_type = type;
+        m_speed = speed;
     }
-
-    //Getter
-    void GetInfo()
+    void GetProcessorInfo()                 //  Геттер
     {
-        std::cout << "Processor for " << Version << " Speed: " << Speed << " Type: x" << Type << "\n";
+        std::cout << "Processor for Version: " << m_version << ", Speed: " << m_speed << ", Type: x" << m_type << "\n";
     }
-    virtual ~IProcessor(){}
+    virtual ~IProcessor() = default;
 };
+
+
+class IntelProcessor: public IProcessor {}; //  Конкретный класс IntelProcessor, реализующий абстрактный класс IProcessor
+
+
+class AMDProcessor: public IProcessor {};   //  Конкретный класс AMDProcessor, реализующий абстрактный класс IProcessor
 
 
 #endif // IPROCESSOR_H

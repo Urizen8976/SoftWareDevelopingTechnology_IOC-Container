@@ -8,21 +8,19 @@ int IOCContainer::s_nextTypeId = 115094801;
 
 int main(int argc, char *argv[])
 {
-    QCoreApplication a(argc, argv);
+    IOCContainer injector;                                                           //  Инициализация IOC-контейнера
 
-    IOCContainer injector;//add IOC container
-    injector.RegisterInstance<IProcessor,AMDProcessor>();// add object of AMDProcessor Class
-    injector.GetObject<IProcessor>()->SetProcessor("AMD",ProcessorType::x64,5000);//initialization processor
 
-    //TEST_1
-    Computer testComputer(injector.GetObject<IProcessor>().get());//create computer by created processor
-    testComputer.Info();// get info about processor
+    //---------------------Example #1-----------------------
+    injector.RegisterInstance<IProcessor,AMDProcessor>();                            //  Регистрация сущности (AMD) методом RegisterInstance()
+    injector.GetObject<IProcessor>()->SetProcessor("AMD", ProcessorType::x64,5000);  //  Получение из контейнера процессора и установка ему инф-ии
+    Computer testComputer(injector.GetObject<IProcessor>().get());                   //  Инициализация компьютера с заданным ранее процессором
+    testComputer.Info();                                                             //  Вывод информации о процессоре компьютера
 
-    //DATA FOR TEST_2
-    injector.RegisterInstance<IProcessor,IntelProcessor>();
-    injector.GetObject<IProcessor>()->SetProcessor("Intel", ProcessorType::x86,3222);
 
-    //TEST_2
-    Computer cmp(injector.GetObject<IProcessor>().get());
-    cmp.Info();
+    //---------------------Example #2-----------------------
+    injector.RegisterInstance<IProcessor,IntelProcessor>();                          //  Регистрация сущности (Intel) методом RegisterInstance()
+    injector.GetObject<IProcessor>()->SetProcessor("Intel",ProcessorType::x86,3222); //  Получение из контейнера процессора и установка ему инф-ии
+    Computer cmp(injector.GetObject<IProcessor>().get());                            //  Инициализация компьютера с заданным ранее процессором
+    cmp.Info();                                                                      //  Вывод информации о процессоре компьютера
 }

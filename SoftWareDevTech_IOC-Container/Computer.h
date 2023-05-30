@@ -3,17 +3,7 @@
 
 
 #include <iostream>
-#include <iprocessor.h>
-
-
-class IntelProcessor:public IProcessor
-{
-};
-
-
-class AMDProcessor:public IProcessor
-{
-};
+#include <IProcessor.h>
 
 
 class Computer
