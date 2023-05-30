@@ -6,28 +6,25 @@
 #include <IProcessor.h>
 
 
-class Computer
+class Computer                                //  Класс компьютера, включающего в себя процессор
 {
-    IProcessor* Processor;// processor as attribute
+protected:
+    IProcessor* m_processor;
+
 public:
-    Computer(IProcessor* proc)//constructor with IProcessor as argument
+    Computer(IProcessor* processor)           //  Конструктор
     {
-        Processor = proc;
+        m_processor = processor;
     }
-    void SetProc(IProcessor* proc)// Set processor
+    void SetProcessor(IProcessor* processor)  //  Сеттер для определения процессора
     {
-        Processor = proc;
+        m_processor = processor;
     }
-    void Info()// Output info about processor
+    void GetComputerInfo()                    //  Геттер для вывода инф-ии о компьютере (его процессоре)
     {
-        Processor->GetInfo();
+        m_processor->GetProcessorInfo();
     }
-
 };
-
-
-//написать похожий класс для амд
-//написать Iprocessor + добавить в класс компьютер как атрибут
 
 
 #endif // COMPUTER_H
