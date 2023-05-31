@@ -13,7 +13,8 @@ using namespace std;
 class IOCContainer
 {
     static int s_nextTypeId;                     //  Статическая переменная, указывающая на идентификатор следующего типа, который будет выделен
-    template<typename T> static int GetTypeID()  //  Шаблонная функция для определенного типа T, возвращающая значение идентификатора типа
+    template<typename T>
+    static int GetTypeID()                       //  Шаблонная функция для определенного типа T, возвращающая значение идентификатора типа
     {
         static int typeId = s_nextTypeId++;      //  Экземпляр статической локальной переменной для каждого типа
         return typeId;
@@ -28,7 +29,7 @@ public:
 
 
     template<typename T>
-    class CFactory : public FactoryRoot   //  Фабрика определенного типа T, реализующая абстрактный базовый класс FactoryRoot
+    class CFactory : public FactoryRoot                        //  Фабрика определенного типа T, реализующая абстрактный класс FactoryRoot
     {
         std::function<std::shared_ptr<T>()> m_functor;         //  Функтор для создания и возврата объекта - объект, вызываемый как функция
     public:                                                    //  (Пустой шаблонный класс)
@@ -48,7 +49,6 @@ public:
 
 
     //Регистрация экземпляров класса (ЭК)
-
     // Самая простая реализация - регистрация функтора (принимает интерфейсный тип и переменное число аргументов)
     template<typename TInterface, typename... TS>                 //  Регистрация функтора в IoC-К для создания объектов типа TInterface
     void RegisterFunctor( std::function<std::shared_ptr<TInterface>(std::shared_ptr<TS>... ts)> functor)
