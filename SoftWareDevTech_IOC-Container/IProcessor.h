@@ -11,20 +11,20 @@ enum ProcessorType                          //  Определение двух 
 
 class IProcessor                            //  Создание абстрактного класса для процессора
 {
-protected:
-    std::string m_version;                  //  Объявление 3-ёх нужных член-данных
-    ProcessorType m_type;
-    double m_speed;
-
 public:
     virtual void SetProcessorInfo(std::string version, ProcessorType type, double speed) = 0;
     virtual void GetProcessorInfo() = 0;
-    virtual ~IProcessor() = default;  //  std::cout << "destructor" << std::endl << std::endl;
+    virtual ~IProcessor() = default;         //  std::cout << "destructor" << std::endl << std::endl;
 };
 
 
 class IntelProcessor: public IProcessor     //  Конкретный класс IntelProcessor, реализующий абстрактный класс IProcessor
 {
+protected:
+    std::string m_version;                  //  Объявление 3-ёх нужных член-данных
+    ProcessorType m_type;
+    double m_speed;
+
 public:
     IntelProcessor() = default;             //  Конструктор по умолчанию
     ~IntelProcessor() = default;            //  Деструктор по умолчанию
@@ -43,6 +43,11 @@ public:
 
 class AMDProcessor: public IProcessor       //  Конкретный класс AMDProcessor, реализующий абстрактный класс IProcessor
 {
+protected:
+    std::string m_version;                  //  Объявление 3-ёх нужных член-данных
+    ProcessorType m_type;
+    double m_speed;
+
 public:
     AMDProcessor() = default;               //  Конструктор по умолчанию
     ~AMDProcessor() = default;              //  Деструктор по умолчанию
